@@ -6,8 +6,13 @@
 <body>
   <?php
   include("dbconnect.php");
-
-  $q = "INSERT INTO todo (`todo`.`desc`, `todo`.`date`, `todo`.`done`) VALUES('".$_POST['desc']."', '".$_POST['date']."', 0)";
+  if(empty($_POST['date'])) {
+   $date = date("Y-m-d H:i:s");
+   
+} else {
+	$date = $_POST['date'];
+}
+  $q = "INSERT INTO todo (`todo`.`desc`, `todo`.`date`, `todo`.`done`) VALUES('".$_POST['desc']."', '".$date."', 0)";
   $x = mysqli_query($con, $q);
 
   if($x == 1) {
